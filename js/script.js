@@ -1,4 +1,3 @@
-js;
 const words = [
   'abandon',
   'beacon',
