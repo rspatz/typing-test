@@ -259,6 +259,13 @@ const timerElement = document.getElementById('timer');
 const tryAgainButton = document.getElementById('try-again');
 const finalScoreElement = document.getElementById('final-score');
 
+let totalTyped = '';
+let currentCharIndex = 0;
+let errors = 0;
+let longText = generateLongText();
+
+textContainer.textContent = longText;
+
 // Shuffle words array
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -274,5 +281,24 @@ function generateLongText() {
   return shuffledWords.join(' ');
 }
 
-let longText = generateLongText();
-textContainer.textContent = longText;
+// Handle typing over the displayed text and scrolling
+document.addEventListener('keydown', e => {
+  if (e.key === 'Backspace') {
+    if (totalTyped.length > 0) {
+      currentCharIndex = Math.max(currentCharIndex - 1, 0);
+      totalTyped = totalTyped.slice(0, -1);
+    }
+  } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+    totalTyped += e.key;
+    currentCharIndex++;
+  }
+
+  console.log(
+    'e.key',
+    e.key,
+    'totalTyped',
+    totalTyped,
+    'currentCharIndex',
+    currentCharIndex
+  );
+});
