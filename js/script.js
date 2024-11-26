@@ -293,15 +293,6 @@ document.addEventListener('keydown', e => {
     currentCharIndex++;
   }
 
-  console.log(
-    'e.key',
-    e.key,
-    'totalTyped',
-    totalTyped,
-    'currentCharIndex',
-    currentCharIndex
-  );
-
   const textArray = longText.split('');
   console.log(textArray);
   textContainer.innerText = '';
@@ -322,5 +313,11 @@ document.addEventListener('keydown', e => {
 
     span.textContent = textArray[i];
     textContainer.appendChild(span);
+  }
+
+  // Scroll container only after 20 characters
+  if (totalTyped.length >= 20) {
+    const scrollAmount = (totalTyped.length - 20) * 14;
+    textContainer.scrollLeft = scrollAmount;
   }
 });
