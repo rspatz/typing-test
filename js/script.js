@@ -301,4 +301,26 @@ document.addEventListener('keydown', e => {
     'currentCharIndex',
     currentCharIndex
   );
+
+  const textArray = longText.split('');
+  console.log(textArray);
+  textContainer.innerText = '';
+
+  errors = 0;
+
+  for (let i = 0; i < textArray.length; i++) {
+    const span = document.createElement('span');
+
+    if (i < totalTyped.length) {
+      if (totalTyped[i] === textArray[i]) {
+        span.classList.add('correct');
+      } else {
+        span.classList.add('error');
+        errors++;
+      }
+    }
+
+    span.textContent = textArray[i];
+    textContainer.appendChild(span);
+  }
 });
